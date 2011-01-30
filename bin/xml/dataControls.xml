@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls>
+	<control type="List">
+		<properties>
+			<property name="editable" description="A flag that indicates whether or not the user can edit items in the data provider" />
+			<property name="editedItemPosition" description="The column and row index of the item renderer for the data provider item being edited, if any." />
+			<property name="editedItemRenderer" description="A reference to the item renderer in the DataGrid control whose item is currently being edited." />
+			<property name="editorDataField" description="The name of the property of the item editor that contains the new data for the list item." />
+			<property name="editorHeightOffset" description="The height of the item editor, in pixels, relative to the size of the item renderer." />
+			<property name="editorUsesEnterKey" description="A flag that indicates whether the item editor uses Enter key." />
+			<property name="editorWidthOffset" description="The width of the item editor, in pixels, relative to the size of the item renderer." />
+			<property name="editorXOffset" description="The x location of the upper-left corner of the item editor, in pixels, relative to the upper-left corner of the item." />
+			<property name="editorYOffset" description="The y location of the upper-left corner of the item editor, in pixels, relative to the upper-left corner of the item." />
+			<property name="enableIME" description="A flag that indicates whether the IME should be enabled when the component receives focus." />
+			<property name="imeMode" description="Specifies the IME (input method editor) mode." />
+			<property name="itemEditor" description="The class factory for the item editor to use for the control, if the editable property is set to true." />
+			<property name="itemEditorInstance" description="A reference to the currently active instance of the item editor, if it exists." />
+			<property name="rendererIsEditor" description="Specifies whether the item renderer is also an item editor." />
+		</properties>
+	</control>
+</controls>
