@@ -6,27 +6,17 @@
 
 	<fx:Script>
 		<![CDATA[
+			import com.flexTest.model.ModelSingleton;
 			import mx.rpc.events.ResultEvent;
 			import mx.controls.Alert;
 			import mx.rpc.events.FaultEvent;
 			import nl.demonsters.debugger.MonsterDebugger;
 			
-			[Bindable]
-			private var _xString : String = 'xml/dataControls.xml';
-			[Bindable]
-			private var _obj : XMLList;
-			private var debug : MonsterDebugger;
+			private var model : ModelSingleton;			
 			
 			private function init() : void
 			{
-				debug = new MonsterDebugger(this);
-				myxml.send();
-			}
-			
-			private function showAll( event : ResultEvent ) : void
-			{
-				_obj = XMLList(event.target.lastResult.control.properties.property);
-				MonsterDebugger.trace(this, _obj);
+				model = ModelSingleton.getInstance();
 			}
 			
 			private function faultHandle(event:FaultEvent) : void 
@@ -34,29 +24,32 @@
                 Alert.show(event.fault.message, "Error"); 
             }
             
-            private function propNameLabelFunc( item:Object, column:DataGridColumn ) : String
-            {
-            	return item.@name; 
-            }
-            
-            private function propDescripLabelFunc( item:Object, column:DataGridColumn ) : String
-            {
-            	return item.@description;
-            }
-			
 		]]>
 	</fx:Script>
 
-	<fx:Declarations>
-		<mx:HTTPService id="myxml" url="{ _xString }" resultFormat="e4x" result="showAll(event)"  fault="faultHandle(event)" />
-	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
 
-	<mx:DataGrid id="grid" width="100%" dataProvider="{ _obj }">
-		<mx:columns>
-			<mx:DataGridColumn headerText="Property Name"
-				labelFunction="propNameLabelFunc"/>
-			<mx:DataGridColumn headerText="Property Description" labelFunction="propDescripLabelFunc" />
-		</mx:columns>
-	</mx:DataGrid>
+	<s:states>
+		<s:State name="default"/>
+		<s:State name="Question"/>
+		<s:State name="Answer"/>
+	</s:states>
 
+	<s:VGroup>
+		<s:Button id="getQuesBtn" label="Get Question" includeIn="default"/>
+		<s:Label text="Question Goes Here" includeIn="Question"/>
+		<s:RadioButton id="r1" includeIn="Question"/>
+		<s:RadioButton id="r2" includeIn="Question"/>
+		<s:RadioButton id="r3" includeIn="Question"/>
+		<s:RadioButton id="r4" includeIn="Question"/>
+		<s:Label text="Answer was wrong" includeIn="Answer"/>
+	</s:VGroup>
+
+	<s:VGroup>
+		<s:Button label="Default" click="currentState = 'default'"/>
+		<s:Button label="Question" click="currentState = 'Question'"/>
+		<s:Button label="Answer" click="currentState = 'Answer'"/>
+	</s:VGroup>
 </s:Application>
